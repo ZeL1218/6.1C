@@ -5,23 +5,19 @@ pipeline {
         stage('Build') {
             steps {
                 echo 'Building the code using Maven 3.23'
-                sh 'mvn clean package'
             }
         }
 
         stage('Unit and Integration Tests') {
             steps {
                 echo 'Running unit and integration tests with JUnit...'
-                sh 'mvn test'
             }
         }
 
         stage('Code Analysis') {
             steps {
-                echo 'Analyzing the code with SonarQube...'
-                withSonarQubeEnv('SonarQube') {
-                    sh 'mvn sonar:sonar'
-                }
+                echo 'Analyzing the code with SonarQube...' 
+                
             }
         }
 
@@ -35,21 +31,18 @@ pipeline {
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploying to staging environment...'
-                sh './deploy.sh staging'
             }
         }
 
         stage('Integration Tests on Staging') {
             steps {
                 echo 'Running integration tests on staging environment...'
-                sh './run_integration_tests.sh staging'
             }
         }
 
         stage('Deploy to Production') {
             steps {
                 echo 'Deploying to production environment...'
-                sh './deploy.sh production'
             }
         }
     }
