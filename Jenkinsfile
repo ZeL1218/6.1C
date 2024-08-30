@@ -2,7 +2,7 @@ pipeline {
     agent any
     
     tools {
-        maven 'Maven 3.x' // 引用你在Jenkins中配置的Maven名称
+        maven 'Maven 3.x' 
     }
 
     stages {
