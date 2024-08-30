@@ -29,21 +29,7 @@ pipeline {
                 echo 'Tool: OWASP Dependency-Check (for security vulnerabilities)'
             }
         }
-    }
 
-        post {
-        success {
-            mail to: 's223926313@deakin.edu.au',
-                subject: "Pipeline succeeded",
-                body: "The pipeline has completed successfully."
-        }
-        failure {
-            mail to: 's223926313@deakin.edu.au',
-                subject: "Pipeline failed",
-                body: "The pipeline has failed. Please check the logs."
-        }
-    }
-    stages {
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploy the application to a staging server.'
@@ -63,6 +49,19 @@ pipeline {
                 echo 'Deploy the application to a production server.'
                 echo 'Tool: AWS CLI (for deployment to AWS EC2 or S3)'
             }
+        }
+    }
+
+    post {
+        success {
+            mail to: 's223926313@deakin.edu.au',
+                subject: "Pipeline succeeded",
+                body: "The pipeline has completed successfully."
+        }
+        failure {
+            mail to: 's223926313@deakin.edu.au',
+                subject: "Pipeline failed",
+                body: "The pipeline has failed. Please check the logs."
         }
     }
 }
