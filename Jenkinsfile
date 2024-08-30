@@ -29,6 +29,7 @@ pipeline {
                 echo 'Tool: OWASP Dependency-Check (for security vulnerabilities)'
             }
         }
+    }
 
         post {
         success {
@@ -42,7 +43,7 @@ pipeline {
                 body: "The pipeline has failed. Please check the logs."
         }
     }
-
+    stages {
         stage('Deploy to Staging') {
             steps {
                 echo 'Deploy the application to a staging server.'
