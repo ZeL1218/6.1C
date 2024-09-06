@@ -2,14 +2,6 @@ pipeline {
     agent any
 
     stages {
-        stage('Run Build') {
-            steps {
-                script {
-                    sh 'your-build-command > build.log'
-                }
-            }
-        }
-        
         stage('Build') {
             steps {
                 echo 'Build the code using a build automation tool.'
@@ -62,16 +54,16 @@ pipeline {
 
     post {
         success {
-            emailext attachmentsPattern: 'build.log',
-                     to: 's223926313@deakin.edu.au',
+            emailext to: 's223926313@deakin.edu.au',
                      subject: "Pipeline succeeded",
-                     body: "The pipeline has completed successfully. Please find the log attached."
+                     body: "The pipeline has completed successfully. Please find the log attached."，
+                     attachLog: true
         }
         failure {
-            emailext attachmentsPattern: 'build.log',
-                     to: 's223926313@deakin.edu.au',
+            emailext to: 's223926313@deakin.edu.au',
                      subject: "Pipeline failed",
-                     body: "The pipeline has failed. Please check the attached logs."
+                     body: "The pipeline has failed. Please check the attached logs."，
+                     attachLog: true
         }
     }
 }
