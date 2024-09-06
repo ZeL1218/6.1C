@@ -57,11 +57,13 @@ pipeline {
             mail to: 's223926313@deakin.edu.au',
                 subject: "Pipeline succeeded",
                 body: "The pipeline has completed successfully."
+            attachLog: true
         }
         failure {
             mail to: 's223926313@deakin.edu.au',
                 subject: "Pipeline failed",
                 body: "The pipeline has failed. Please check the logs."
+            attachLog: true
         }
     }
 }
