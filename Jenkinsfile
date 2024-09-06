@@ -59,14 +59,17 @@ pipeline {
     post {
         always {
             script {
-                writeFile file: 'pipeline.log', text: currentBuild.rawBuild.getLog().join("\n")
+                def logs = currentBuild.rawBuild.getLog(1000).join("\n")
+                writeFile file: 'pipeline.log', text: logs
             }
             archiveArtifacts artifacts: 'pipeline.log', allowEmptyArchive: true
 
-            emailext attachmentsPattern: 'pipeline.log',
-                     to: 's223926313@deakin.edu.au',
-                     subject: "Pipeline completed",
-                     body: "The pipeline has completed. Please find the log file attached."
+            emailext(
+                attachmentsPattern: 'pipeline.log',
+                to: 's223926313@deakin.edu.au',
+                subject: "Pipeline completed",
+                body: "The pipeline has completed. Please find the log file attached."
+            )
         }
     }
 }
