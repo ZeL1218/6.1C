@@ -61,7 +61,7 @@ pipeline {
             emailext attachLog: true, 
                      to: 's223926313@deakin.edu.au',
                      subject: "Pipeline completed",
-                     body: "Please find the log attached."
+                     body: "Please Check the log attached."
         }
     }
 }
