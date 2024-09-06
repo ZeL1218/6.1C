@@ -63,7 +63,7 @@ pipeline {
             }
             archiveArtifacts artifacts: 'pipeline.log', allowEmptyArchive: true
 
-            email attachmentsPattern: 'pipeline.log',
+            mail attachmentsPattern: 'pipeline.log',
                      to: 's223926313@deakin.edu.au',
                      subject: "Pipeline completed",
                      body: "The pipeline has completed. Please find the log file attached."
