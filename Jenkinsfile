@@ -57,14 +57,17 @@ pipeline {
     }
 
     post {
-        always {
-            
-            emailext(
-                to: 's223926313@deakin.edu.au',
-                subject: "Pipeline completed",
-                body: "The pipeline has completed. Please find the log file attached.".
-                attachLog: true
-            )
+        success {
+            emailext to: 's223926313@deakin.edu.au',
+                     subject: "Pipeline succeeded",
+                     body: "The pipeline has completed successfully. Please find the log attached.",
+                     attachLog: true
+        }
+        failure {
+            emailext to: 's223926313@deakin.edu.au',
+                     subject: "Pipeline failed",
+                     body: "The pipeline has failed. Please check the attached logs.",
+                     attachLog: true
         }
     }
 }
