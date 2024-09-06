@@ -8,6 +8,7 @@ pipeline {
                     sh 'your-build-command > build.log'
                 }
             }
+        }
         
         stage('Build') {
             steps {
@@ -64,13 +65,13 @@ pipeline {
             emailext attachmentsPattern: 'build.log',
                      to: 's223926313@deakin.edu.au',
                      subject: "Pipeline succeeded",
-                     body: "The pipeline has completed successfully. Please find the log attached.",
+                     body: "The pipeline has completed successfully. Please find the log attached."
         }
         failure {
             emailext attachmentsPattern: 'build.log',
                      to: 's223926313@deakin.edu.au',
                      subject: "Pipeline failed",
-                     body: "The pipeline has failed. Please check the attached logs.",
+                     body: "The pipeline has failed. Please check the attached logs."
         }
     }
 }
