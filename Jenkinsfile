@@ -58,10 +58,17 @@ pipeline {
 
     post {
         always {
-            emailext attachLog: true, 
+            script {
+                def logFile = "build.log"
+                powershell(script: """
+                    Get-Content $logFile | Where-Object { \$_ -notmatch '\\[Pipeline\\]' } | Set-Content filtered-build.log
+                """)
+            }
+            
+            emailext attachmentsPattern: 'filtered-build.log',
                      to: 's223926313@deakin.edu.au',
                      subject: "Pipeline completed",
-                     body: "Please find the log attached."
+                     body: "Please find the filtered log attached."
         }
     }
 }
